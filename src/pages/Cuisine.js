@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 // import { motion } from 'framer-motion/dist/framer-motion';
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Cuisine() {
   const [cuisine, setCuisine] = useState([]);
@@ -20,11 +21,13 @@ function Cuisine() {
   return (
     <div>
       <Grid>
-        {cuisine.map((item) => {
+        {cuisine.map((recipe) => {
           return (
-            <Card key={item.id}>
-              <img src={item.image} />
-              <h4>{item.title}</h4>
+            <Card key={recipe.id}>
+              <Link to={`/recipe/${recipe.id}`}>
+                <img src={recipe.image} />
+                <h4>{recipe.title}</h4>
+              </Link>
             </Card>
           );
         })}
