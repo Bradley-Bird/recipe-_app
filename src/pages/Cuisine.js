@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion/dist/framer-motion';
-import { Link, useParams } from 'react-router-dom';
+// import { motion } from 'framer-motion/dist/framer-motion';
+import { useParams } from 'react-router-dom';
 
 function Cuisine() {
   const [cuisine, setCuisine] = useState([]);
