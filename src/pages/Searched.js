@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 function Searched() {
@@ -18,11 +18,13 @@ function Searched() {
   }, [params.search]);
   return (
     <Grid>
-      {searchedRecipes.map((item) => {
+      {searchedRecipes.map((recipe) => {
         return (
-          <Card key={item.id}>
-            <img src={item.image} />
-            <h4>{item.title}</h4>
+          <Card key={recipe.id}>
+            <Link to={`/recipe/${recipe.id}`}>
+              <img src={recipe.image} />
+              <h4>{recipe.title}</h4>
+            </Link>
           </Card>
         );
       })}
