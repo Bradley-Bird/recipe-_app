@@ -8,15 +8,16 @@ function Recipe() {
   const params = useParams();
   const [details, setDetails] = useState({});
   const [activeTab, setActiveTab] = useState('instructions');
-  const fetchDetails = async () => {
-    const data = await fetch(
-      `https://api.spoonacular.com/recipes/${params.name}/information?apiKey=${process.env.REACT_APP_API_KEY}`
-    );
-    const detailData = await data.json();
-    setDetails(detailData);
-  };
+  const deep = { ...{ details: { extendedIngredients: [] } } };
 
   useEffect(() => {
+    const fetchDetails = async () => {
+      const data = await fetch(
+        `https://api.spoonacular.com/recipes/${params.name}/information?apiKey=${process.env.REACT_APP_API_KEY}`
+      );
+      const detailData = await data.json();
+      setDetails(detailData);
+    };
     fetchDetails();
   }, [params.name]);
 
@@ -41,6 +42,15 @@ function Recipe() {
         >
           Ingredients
         </Button>
+        <div>
+          <h3 dangerouslySetInnerHTML={{ __html: details.summary }}></h3>
+          <h3 dangerouslySetInnerHTML={{ __html: details.instructions }}></h3>
+        </div>
+        <ul>
+          {deep.details.extendedIngredients.map((ingredient) => {
+            <li key={ingredient.id}>{ingredient.original}</li>;
+          })}
+        </ul>
       </Info>
     </DetailWrapper>
   );
