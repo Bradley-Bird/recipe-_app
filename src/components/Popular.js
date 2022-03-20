@@ -53,7 +53,6 @@ function Popular() {
           })}
         </Splide>
       </Wrapper>
-      );
     </div>
   );
 }
